@@ -74,7 +74,7 @@ def merge(lora_config, base_weight, lora_weight, output):
     llama_model.save_pretrained(output, drop_lora=True)
     logger.info(f"Saved merged model to {output}, validating")
 
-    new_state_dict = torch.load(output / "model.pth", map_location="cpu")
+    new_state_dict = torch.load(output / "model.pth", map_location="cpu", weights_only=True)
     original_keys = set(llama_state_dict_copy.keys())
 
     tolerance = 1e-5

@@ -402,7 +402,7 @@ def load_codec_model(codec_checkpoint_path, device, precision=torch.bfloat16):
     cfg = OmegaConf.load(str(config_path))
     codec = instantiate(cfg)
 
-    state_dict = torch.load(codec_checkpoint_path, map_location="cpu")
+    state_dict = torch.load(codec_checkpoint_path, map_location="cpu", weights_only=True)
     if "state_dict" in state_dict:
         state_dict = state_dict["state_dict"]
     if any("generator" in k for k in state_dict):
